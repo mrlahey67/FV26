@@ -3,7 +3,7 @@ import ElectionMap from './components/ElectionMap.jsx';
 import { PartyPill, DetailPanel, NationalBar } from './components/Sidebar.jsx';
 import TransferPanel from './components/TransferPanel.jsx';
 import DemographicsPanel from './components/DemographicsPanel.jsx';
-import { PARTIES, getParty, swingColor } from './data/parties.js';
+import { PARTIES, PICKER_PARTIES, getParty, swingColor } from './data/parties.js';
 
 const VIEWS = [
   { id: "winner", label: "Største parti" },
@@ -65,8 +65,8 @@ export default function App() {
 
       {/* Demographics: side-by-side layout */}
       {view === "demographics" ? (
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 28px 40px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+        <div className="layout-demo-wrap">
+          <div className="layout-demo">
             <div style={{
               background: "rgba(255,255,255,0.03)", borderRadius: 14,
               border: "1px solid rgba(255,255,255,0.07)",
@@ -92,10 +92,7 @@ export default function App() {
         </div>
       ) : (
         /* Standard map + sidebar layout */
-        <div style={{
-          display: "grid", gridTemplateColumns: "1fr 340px", gap: 20,
-          maxWidth: 1200, margin: "0 auto", padding: "0 28px 40px",
-        }}>
+        <div className="layout-main">
           {/* Map */}
           <div style={{
             background: "rgba(255,255,255,0.03)", borderRadius: 14,
@@ -176,7 +173,7 @@ export default function App() {
                   Vælg parti
                 </div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                  {PARTIES.filter(p => p.id !== "H").map((p) => (
+                  {PICKER_PARTIES.map((p) => (
                     <PartyPill key={p.id} party={p} selected={selectedParty === p.id}
                       onClick={() => setSelectedParty(p.id)} />
                   ))}
@@ -194,7 +191,7 @@ export default function App() {
                 <div style={{ marginBottom: 8 }}>
                   <div style={{ fontSize: 10, color: "#8888a0", marginBottom: 3 }}>Parti A</div>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
-                    {PARTIES.filter(p => p.id !== "H").map((p) => (
+                    {PICKER_PARTIES.map((p) => (
                       <PartyPill key={p.id} party={p} selected={partyA === p.id}
                         onClick={() => setPartyA(p.id)} small />
                     ))}
@@ -203,7 +200,7 @@ export default function App() {
                 <div>
                   <div style={{ fontSize: 10, color: "#8888a0", marginBottom: 3 }}>Parti B</div>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
-                    {PARTIES.filter(p => p.id !== "H").map((p) => (
+                    {PICKER_PARTIES.map((p) => (
                       <PartyPill key={p.id} party={p} selected={partyB === p.id}
                         onClick={() => setPartyB(p.id)} small />
                     ))}

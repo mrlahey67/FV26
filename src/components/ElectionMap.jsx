@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback, useMemo } from 'react';
-import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, AttributionControl, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import geoData from '../data/geo.json';
 import { getWinner, getSwing } from '../data/elections.js';
@@ -94,7 +94,9 @@ export default function ElectionMap({
         }
       },
       click: () => {
-        setSelected(selected === name ? null : name);
+        // Funktionel opdatering: handleren bindes kun ved layer-oprettelse,
+        // så `selected` ville være forældet her
+        setSelected(prev => (prev === name ? null : name));
       },
     });
 
@@ -102,7 +104,7 @@ export default function ElectionMap({
       `<strong>${name}</strong><br/><span style="opacity:0.7">${storkreds} Storkreds</span>`,
       { sticky: true, className: 'dark-tooltip', direction: 'top', offset: [0, -10] }
     );
-  }, [selected, setSelected, setHovered]);
+  }, [setSelected, setHovered]);
 
   return (
     <div style={{ position: 'relative', height: '100%', minHeight: 500, borderRadius: 14, overflow: 'hidden' }}>
@@ -113,9 +115,11 @@ export default function ElectionMap({
         zoomControl={false}
         attributionControl={false}
       >
+        <AttributionControl position="bottomleft" prefix={false} />
         <TileLayer
           url="https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png"
           opacity={0.4}
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>-bidragsydere &copy; <a href="https://carto.com/attributions">CARTO</a>'
         />
         <GeoJSON
           key={styleKey}

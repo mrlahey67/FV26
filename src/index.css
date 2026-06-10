@@ -26,9 +26,50 @@ body {
   border-top-color: rgba(15, 15, 30, 0.92) !important;
 }
 
-/* Hide Leaflet attribution */
+/* Leaflet-attribution (kreditering kræves af OSM/CARTO) — mørk og diskret */
 .leaflet-control-attribution {
-  display: none !important;
+  background: rgba(15, 15, 30, 0.75) !important;
+  color: #8888a0 !important;
+  font-size: 9px !important;
+  padding: 1px 6px !important;
+}
+
+.leaflet-control-attribution a {
+  color: #a0a0b8 !important;
+}
+
+/* Layout: kort + sidepanel, stables på smalle skærme */
+.layout-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px 40px;
+}
+
+.layout-demo-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px 40px;
+}
+
+.layout-demo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .layout-main,
+  .layout-demo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .layout-main,
+  .layout-demo-wrap {
+    padding: 0 14px 28px;
+  }
 }
 
 /* Make Leaflet background match theme */

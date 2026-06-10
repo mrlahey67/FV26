@@ -13,7 +13,14 @@ export const PARTIES = [
   { id: "AE", name: "Danmarksdemokraterne", short: "DD", color: "#7B2D26" },
   { id: "AA", name: "Alternativet", short: "ALT", color: "#2DC84D" },
   { id: "H", name: "Borgernes Parti", short: "BP", color: "#555" },
+  // Partier der kun stillede op i 2022 — skal med for at landsresultatet summer korrekt
+  { id: "D", name: "Nye Borgerlige", short: "NB", color: "#127B7F" },
+  { id: "Q", name: "Frie Grønne", short: "FG", color: "#4E9B47" },
+  { id: "K", name: "Kristendemokraterne", short: "KD", color: "#5C7FA3" },
 ];
+
+// H har ingen 2022-data og D/Q/K ingen 2026-data — holdes ude af partivælgerne
+export const PICKER_PARTIES = PARTIES.filter((p) => !["H", "D", "Q", "K"].includes(p.id));
 
 // DST uses Ø for Enhedslisten, Æ for DD, Å for ALT
 const DST_MAP = { "Ø": "OE", "Æ": "AE", "Å": "AA" };

@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
-import { PARTIES, getParty, normParty } from '../data/parties.js';
+import { PICKER_PARTIES, getParty } from '../data/parties.js';
 import { getSwing, getResults } from '../data/elections.js';
 import demographics from '../data/demographics.json';
 import E26 from '../data/election2026.json';
@@ -239,7 +239,7 @@ export default function DemographicsPanel({ selected, setSelected }) {
           Parti &amp; metrik
         </div>
         <div style={{ display: "flex", gap: 4, marginBottom: 8, flexWrap: "wrap" }}>
-          {PARTIES.filter((p) => !["H"].includes(p.id)).map((p) => (
+          {PICKER_PARTIES.map((p) => (
             <button key={p.id} onClick={() => setPartyId(p.id)} style={{
               display: "inline-flex", alignItems: "center", gap: 4,
               padding: "3px 8px", borderRadius: 14,
