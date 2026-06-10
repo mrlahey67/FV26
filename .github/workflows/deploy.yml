@@ -26,7 +26,10 @@ jobs:
           node-version: 20
           cache: npm
 
-      - run: npm ci
+      # npm install i stedet for npm ci: package-lock.json mangler gh-pages
+      # (tilføjet til package.json uden lock-opdatering). Kør `npm install`
+      # lokalt når Node er installeret, commit lockfilen, og skift til npm ci.
+      - run: npm install
 
       - run: npm run build
 
